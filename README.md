@@ -53,7 +53,7 @@ In addition FreerTr will manipulate the network interface attached to it. <br>
 sudo docker run --detach --privileged --network host -e "FREERTR_INTF_LIST=eth2/20010/20011" -e "FREERTR_HOSTNAME=freertr" -v "/home/kubeadm/freertr/run:/opt/freertr/run" --name freertr-001 freertr/freertr:latest 
 
 ## Acknowledgement
-I would like to thank Casba Mate original maintainer of FreerTr for this awesome piece of code. <br>
+I would like to thank Csaba Mate original maintainer of FreerTr for this awesome piece of code. <br>
 If you need to understand networking protocol. Read the source, it is exceptionnally well written. If you like reading IETF RFCs you will enfoy stufying this code. <br>
 
 Kudos to <a href=http://mc36.nop.hu/cv.html>Csaba</a>, all credits goes to him. <br>
