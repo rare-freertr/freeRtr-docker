@@ -61,7 +61,7 @@ sudo docker run --detach --privileged --network host -e "FREERTR_INTF_LIST=eth2/
 ## Acknowledgement
 I would like to thank the original maintainer of FreerTr for this awesome piece of code. <br>
 If you need to understand networking protocol. Read the source, it is exceptionnally well written. <br>
-If you like reading IETF RFCs you will enfoy stufying this code. <br>
+If you like reading IETF RFCs you will endoy studying this code. (You'll save tons of sleeping pills)<br>
 
 Kudos to <a href=http://mc36.nop.hu/cv.html>Csaba MATE</a> then... all credits goes to him ! <br>
 
