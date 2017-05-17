@@ -12,7 +12,7 @@ sudo docker run busybox nslookup www.google.com
 ## How to build freerTr container
 ```shell
 git clone https://github.com/frederic-loui/freertr-docker.git
-cd ./freertr-docker <br>
+cd ./freertr-docker
 sudo docker build --tag freertr/freertr:latest .
 ```
 ## How to configure FreerTr before running the container
@@ -29,7 +29,10 @@ As a start use the sample provided and replace eth2 by your NIC device (usually 
 ### freertr-hw.txt:
 In this sample file you'll indicate which Dockerhost interface will be bind to FreerTr container. <br>
 The line use to attach an interface to FreerTr container is: <br>
+```shell
 int <network-device> eth <mac@> <bind_ip@> <tx_port> <bind_ip@> <rx_port> <br>
+```
+
 ```shell
 ...
 int eth2 eth 0000.1111.2222 127.0.0.1 22706 127.0.0.1 22705
@@ -51,12 +54,14 @@ There is 2 processes that is run inside this container: <br>
 
 In addition FreerTr will manipulate the network interface attached to it. <br>
 => This explain why we use --network host flag. In addition
-
+```shell
 sudo docker run --detach --privileged --network host -e "FREERTR_INTF_LIST=eth2/20010/20011" -e "FREERTR_HOSTNAME=freertr" -v "/home/kubeadm/freertr/run:/opt/freertr/run" --name freertr-001 freertr/freertr:latest 
+```
 
 ## Acknowledgement
-I would like to thank Csaba Mate original maintainer of FreerTr for this awesome piece of code. <br>
-If you need to understand networking protocol. Read the source, it is exceptionnally well written. If you like reading IETF RFCs you will enfoy stufying this code. <br>
+I would like to thank the original maintainer of FreerTr for this awesome piece of code. <br>
+If you need to understand networking protocol. Read the source, it is exceptionnally well written. <br>
+If you like reading IETF RFCs you will enfoy stufying this code. <br>
 
-Kudos to <a href=http://mc36.nop.hu/cv.html>Csaba</a>, all credits goes to him. <br>
+Kudos to <a href=http://mc36.nop.hu/cv.html>Csaba MATE</a> then... all credits goes to him ! <br>
 
