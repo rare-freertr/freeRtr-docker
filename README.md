@@ -4,12 +4,14 @@ A basic FreerTr docker container
 ## Prerequisite
 - Install docker on Dockerhost with the method of your choice
 - Make sure that docker the container inherit from docker host DNS configuration
-   Check this by issuing: 
-   sudo docker run busybox nslookup www.google.com
+- Check this by issuing: 
+```shell
+sudo docker run busybox nslookup www.google.com
+```
    
 ## How to build freerTr container
 ```shell
-git clone https://github.com/frederic-loui/freertr-docker.git <br>
+git clone https://github.com/frederic-loui/freertr-docker.git
 cd ./freertr-docker <br>
 sudo docker build --tag freertr/freertr:latest .
 ```
