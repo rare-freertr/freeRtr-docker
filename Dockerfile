@@ -24,8 +24,8 @@ RUN apk update && apk upgrade && apk add --no-cache \
     linux-headers \ 
     openrc \ 
     ethtool
-WORKDIR /opt/freertr/src/src/zzz
-RUN ./nat.sh
+WORKDIR /opt/freertr/src/misc/native/
+RUN ./c.sh
 WORKDIR /opt/freertr/
 RUN mv ./src/binTmp/* ./bin 
 
