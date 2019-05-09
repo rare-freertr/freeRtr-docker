@@ -8,19 +8,23 @@ FREERTR_BASE_DIR=$(pwd)
 
 usage(){
 	echo "Usage: `basename $0` -i <intf/port1/port2> -r <freertr-hostname> -h for help";
-	echo "Example: $0 -i \"eth0/22705/22706 eth1/20010/20011\" -r freertr1"
+	echo "Example: $0 -i \"eth0/22705/22706 eth1/20010/20011\" -r freertr"
 	exit 1
 }
 
 bindintf () {
-    FREERTR_INTF_LIST=$1
+    echo "bindintf: FREERTR_INTF_LIST=$FREERTR_INTF_LIST";
+    FREERTR_INTF_LIST=$(echo $1 | tr -d '\"');
 
     echo "--- DECLARING FREERTR INTERFACE RAWINT (FORWARDING PLANE) ---";
-    IFS=" ";
     for FREERTR_INTF in $FREERTR_INTF_LIST;
       do
+	echo "FREERTR_INTF=$FREERTR_INTF";
         IFS=/;
         set $FREERTR_INTF;
+	echo "INTF=$1";
+	echo "PORT_1=$2";
+	echo "PORT_2=$3";
         ifconfig $1 multicast allmulti promisc mtu 1500 up
         ethtool -K $1 rx off
         ethtool -K $1 tx off
@@ -58,10 +62,12 @@ while getopts ":hi:r:" opt;do
 case $opt in
   i)
     FREERTR_INTF_LIST=$OPTARG
+    echo "FREERTR_INTF_LIST: $FREERTR_INTF_LIST";
     iflag=true 
   ;;
   r)
-    FREERTR_HOSNAME=$OPTARG
+    FREERTR_HOSTNAME=$OPTARG
+    echo "FREERTR_HOSTNAME: $FREERTR_HOSTNAME";
     rflag=true 
   ;;
   \?)
@@ -84,7 +90,7 @@ done
 if $iflag && $rflag ;
 then
    bindintf "${FREERTR_INTF_LIST}" "${FREERTR_BASE_DIR}"
-   start_freertr "${FREERTR_BASE_DIR}" ${FREERTR_HOSNAME}
+   start_freertr "${FREERTR_BASE_DIR}" ${FREERTR_HOSTNAME}
 else
    if ! $iflag; then echo "[-i] freertr interface list missing" 
    usage

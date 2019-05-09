@@ -36,4 +36,4 @@ VOLUME ./run:/opt/freertr/run
 ENV FREERTR_HOSTNAME=freertr  \
     FREERTR_INTF_LIST="eth2/20010/20011" 
 
-CMD ./scripts/freertr.sh -i $FREERTR_INTF_LIST -r $FREERTR_HOSTNAME
+CMD ./scripts/freertr.sh -i "$FREERTR_INTF_LIST" -r $FREERTR_HOSTNAME
