@@ -18,7 +18,9 @@ RUN tar xvf ../rtr.tar
 
 COPY . /opt/freertr/
 
-RUN apk update && apk upgrade && apk add --no-cache libpcap-dev ethtool openjdk11-jre-headless
+RUN apk update
+RUN apk upgrade
+RUN apk add --no-cache libpcap-dev ethtool openjdk11-jre-headless
 
 WORKDIR /opt/freertr/
 
