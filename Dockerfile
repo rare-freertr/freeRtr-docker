@@ -1,39 +1,32 @@
-
-FROM openjdk:jre-alpine
+FROM alpine
 MAINTAINER Frederic LOUI <frederic.loui@@renater.fr>
 
-RUN mkdir -p /opt/freertr && \
-    mkdir -p /opt/freertr/bin && \
-    mkdir -p /opt/freertr/src && \
-    mkdir -p /opt/freertr/run
+RUN mkdir -p /opt/freertr
+RUN mkdir -p /opt/freertr/bin
+RUN mkdir -p /opt/freertr/src
+RUN mkdir -p /opt/freertr/run
 
 WORKDIR /opt/freertr/
 
-RUN wget http://freerouter.nop.hu/rtr.zip http://freerouter.nop.hu/rtr.jar && \
-    mv ./rtr.jar ./bin && \
-    unzip ./rtr.zip -d /opt/freertr/src 
+RUN wget http://freerouter.nop.hu/rtr.zip
+RUN wget http://freerouter.nop.hu/rtr.jar
+RUN wget http://freerouter.nop.hu/rtr.tar
+RUN mv ./rtr.jar ./bin
+RUN unzip ./rtr.zip -d /opt/freertr/src
+WORKDIR /opt/freertr/bin
+RUN tar xvf ../rtr.tar
 
 COPY . /opt/freertr/
 
-WORKDIR /opt/freertr/src
-RUN mkdir ./binTmp
-RUN apk update && apk upgrade && apk add --no-cache \
-    gcc \
-    musl-dev \
-    libpcap-dev \ 
-    linux-headers \ 
-    openrc \ 
-    ethtool
-WORKDIR /opt/freertr/src/misc/native/
-RUN ./c.sh
-WORKDIR /opt/freertr/
-RUN mv ./src/binTmp/* ./bin 
+RUN apk update
+RUN apk upgrade
+RUN apk add --no-cache libpcap-dev ethtool openjdk11-jre-headless
 
-RUN apk del gcc musl-dev linux-headers
+WORKDIR /opt/freertr/
 
 VOLUME ./run:/opt/freertr/run
 
 ENV FREERTR_HOSTNAME=freertr  \
-    FREERTR_INTF_LIST="eth2/20010/20011" 
+    FREERTR_INTF_LIST="eth2/20010/20011"
 
 CMD ./scripts/freertr.sh -i "$FREERTR_INTF_LIST" -r $FREERTR_HOSTNAME
