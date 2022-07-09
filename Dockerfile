@@ -1,5 +1,10 @@
-FROM alpine
+FROM debian
 MAINTAINER Frederic LOUI <frederic.loui@@renater.fr>
+
+RUN apt-get update
+RUN apt-get -f -y dist-upgrade
+RUN apt-get -f -y install wget unzip net-tools libpcap-dev openssl iproute2 dpdk openvswitch-switch ethtool default-jre-headless
+RUN apt-get clean
 
 RUN mkdir -p /opt/freertr
 RUN mkdir -p /opt/freertr/bin
@@ -8,19 +13,17 @@ RUN mkdir -p /opt/freertr/run
 
 WORKDIR /opt/freertr/
 
-RUN wget http://freerouter.nop.hu/rtr.zip
-RUN wget http://freerouter.nop.hu/rtr.jar
-RUN wget http://freerouter.nop.hu/rtr.tar
+RUN wget http://www.freertr.org/rtr.zip
+RUN wget http://www.freertr.org/rtr.jar
+RUN wget http://www.freertr.org/rtr.ver
+RUN wget http://www.freertr.org/rtr-`uname -m`.tar
 RUN mv ./rtr.jar ./bin
+RUN mv ./rtr.ver ./bin
 RUN unzip ./rtr.zip -d /opt/freertr/src
 WORKDIR /opt/freertr/bin
-RUN tar xvf ../rtr.tar
+RUN tar xvf ../rtr-`uname -m`.tar
 
 COPY . /opt/freertr/
-
-RUN apk update
-RUN apk upgrade
-RUN apk add --no-cache libpcap-dev ethtool openjdk11-jre-headless
 
 WORKDIR /opt/freertr/
 

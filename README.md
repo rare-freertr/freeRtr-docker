@@ -40,11 +40,11 @@ int eth3 eth 0000.1111.3333 127.0.0.1 20011 127.0.0.1 20010
 ...
 ```
 
-For more detail please refer to FreerTr homepage: http://freerouter.nop.hu/ <br>
+For more detail please refer to FreerTr homepage: http://www.freertr.org/ <br>
 
 ### freertr-sw.txt
 It is the FreerTr router configuration.  <br>
-For more detail please refer to FreerTr homepage: http://freerouter.nop.hu/ <br>
+For more detail please refer to FreerTr homepage: http://www.freertr.org/ <br>
 
 ## How to run FreerTr container
 There is 2 processes that is run inside this container: <br>
