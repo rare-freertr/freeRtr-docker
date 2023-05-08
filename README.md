@@ -1,3 +1,17 @@
+EDIT: 
+
+"
+
+src.freertr.net???? is my desktop notebook in my livingroom, thats why the hackish name :))))
+
+at least sources.freertr.net .....
+
+which is a random cloud that i trust the most right now.....
+
+frederic, the fuck r u doing bro????
+"
+
+
 # freertr-docker
 A basic FreerTr docker container
 
